@@ -1,6 +1,6 @@
 <template>
     <div>
-        hello loginbbbbbbbbbb
+        hello login
     </div>
 </template>
 
