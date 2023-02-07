@@ -1,0 +1,13 @@
+{
+    "data":[
+        {
+            "userId":123564,
+            "id":11,
+            "username":"开水电影",
+            "author":"water_movie",
+            "userImgUrl":"https://obj.pipi.cn/festatic/common/image/071cb4dfad74d9c83681efde4c13df46.png",
+            "token":"abcdefg",
+            "code":200
+        }
+    ]
+}
