@@ -1,26 +1,27 @@
 <template>
     <div class="box">
         <!-- <h2>第一页</h2> -->
-        <p class="title">{{ movie.title }}</p>
+        <p class="title">{{}}</p>
         <div class="mv_box">
 
-            <div class="mv_nm" v-for="item, index in movie.movieList" :key="index">
-                <img class="mv_img" :src="item.poster" alt="" />
-                <h5 class="name">{{ item.name }}</h5>
+            <div class="mv_nm" v-for="item, index in Movie" :key="index">
+                <img class="mv_img" :src="item.img" alt="" />
+                <h5 class="name">{{ item.nm }}</h5>
             </div>
         </div>
         <div>
-            <van-list class="list" v-model:loading="loading" :finished="finished" @load="onLoad">
-                <div class="mv_nm2" v-for="item, index in movie.movieList" :key="index">
-                    <img class="mv_img" :src="item.poster" alt="" />
-                    <div>
-                        <h4>{{ item.name }}</h4>
-                        <p>{{ item.score }}</p>
+            <van-list class="list" @load="onLoad">
+                <div class="mv_nm2" v-for="item, index in Movie" :key="index">
+                    <img class="mv_img" :src="item.img" alt="" />
+                    <div class="mv_nm3">
+                        <h4>{{ item.nm }}</h4>
+                        <p v-if="item.sc != 0">观众评价:{{ item.sc }}</p>
+                        <p v-if="item.sc == 0">暂无评分</p>
+                        <p>主演:{{ item.star }}</p>
+                        <p>今天{{ item.showst }}家影院放映了{{ item.wish }}场</p>
                     </div>
-                    <van-button type="danger">危险按钮</van-button>
+                    <van-button type="danger">购票</van-button>
                 </div>
-                
-
             </van-list>
         </div>
 
@@ -39,23 +40,44 @@ export default {
     data() {
         return {
             movie: [],
-            movie2: []
         }
     },
-    methods: {
-        handName() {
-            // console.log(111);
-        }
-    },
-    created() {
-        getMostpraised().then((data) => {
-            this.movie = data
-            console.log(this.movie);
-        }),
-        getMoreHotmovies().then((data) => {
-            this.movie2 = data
-            console.log(this.movie2);
-        })
+
+    setup() {
+        const list = ref([]);
+        const Movie = ref([])
+        const loading = ref(true);
+        const finished = ref(false);
+        const refreshing = ref(true);
+
+        const onLoad = () => {
+            getHotmovies().then((data) => {
+                console.log(data);
+                Movie.value = data.movieList;
+                console.log(Movie.value)
+                // getMoreFun(movieIds.value);
+            });
+        };
+
+        // const onRefresh = () => {
+        // //     // 清空列表数据
+        //     finished.value = false;
+
+        // //     // 重新加载数据
+        // //     // 将 loading 设置为 true，表示处于加载状态
+        //     loading.value = true;
+        //     // onLoad();
+        // };
+
+        return {
+            list,
+            onLoad,
+            Movie,
+            loading,
+            finished,
+            // onRefresh,
+            refreshing,
+        };
     },
 
 
@@ -66,13 +88,14 @@ export default {
 .box {
 
     position: relative;
-    // height: 5000px;
+    height: 3940px;
 }
 
 .list {
     overflow: hidden;
-    // height: 3000px;
-    background-color: orange;
+    height: 3730px;
+    background-color: bisque;
+    margin-top: 40px;
 }
 
 .mv_nm {
@@ -81,18 +104,23 @@ export default {
 }
 
 .mv_nm2 {
-    // width: 100%;
-    // display: flex;
-    // overflow: hidden;
-    margin-top: 25px;
+    background-color: greenyellow;
+    margin-top: 5px;
 }
+
+.mv_nm3 {
+    background-color: aqua;
+}
+
 
 .mv_nm2 .mv_img {
 
-    float: left;
+
     width: 100px;
     height: 140px;
 }
+
+
 
 .mv_box {
     display: flex;
