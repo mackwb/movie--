@@ -10,6 +10,8 @@ import { Tab, Tabs } from 'vant';
 import { Divider } from 'vant';
 import { Sticky } from 'vant';
 import { SwipeCell } from 'vant';
+import { List } from 'vant';
+
 
 
 
@@ -35,6 +37,8 @@ app.use(Tabs);
 app.use(Divider);
 app.use(Sticky);
 app.use(SwipeCell);
+app.use(List);
+
 
 
 

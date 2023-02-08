@@ -4,14 +4,27 @@
         <p class="title">{{ movie.title }}</p>
         <div class="mv_box">
 
-            <div class="mv_nm" v-for="item in movie.movieList" :key="item.movieId">
+            <div class="mv_nm" v-for="item, index in movie.movieList" :key="index">
                 <img class="mv_img" :src="item.poster" alt="" />
                 <h5 class="name">{{ item.name }}</h5>
             </div>
         </div>
         <div>
+            <van-list class="list" v-model:loading="loading" :finished="finished" @load="onLoad">
+                <div class="mv_nm2" v-for="item, index in movie.movieList" :key="index">
+                    <img class="mv_img" :src="item.poster" alt="" />
+                    <div>
+                        <h4>{{ item.name }}</h4>
+                        <p>{{ item.score }}</p>
+                    </div>
+                    <van-button type="danger">危险按钮</van-button>
+                </div>
+                
 
+            </van-list>
         </div>
+
+
 
 
 
@@ -19,42 +32,47 @@
 </template>
 
 <script>
-import { getMostpraised, getHotmovies } from '../../../../woter_movie/src/api/home'
+import { ref } from 'vue';
+
+import { getMostpraised, getHotmovies, getMoreHotmovies } from '../../../../woter_movie/src/api/home'
 export default {
     data() {
         return {
-            movie: []
+            movie: [],
+            movie2: []
         }
     },
     methods: {
         handName() {
-            console.log(111);
+            // console.log(111);
         }
     },
     created() {
         getMostpraised().then((data) => {
             this.movie = data
             console.log(this.movie);
+        }),
+        getMoreHotmovies().then((data) => {
+            this.movie2 = data
+            console.log(this.movie2);
         })
-        // this.$store.dispatch('mes/huoQu').then((data) => {
-        //     this.movie = data
-        //     console.log(this.movie);
-        //     this.$store.commit('mes/updateToken',data)
-        //     console.log(this.$store.state.mes.message);
-        // })
-    }
+    },
+
 
 }
 </script>
 
 <style lang="scss" scoped>
 .box {
-    flex: 1;
+
     position: relative;
+    // height: 5000px;
 }
 
-html div {
-    height: 2000px;
+.list {
+    overflow: hidden;
+    // height: 3000px;
+    background-color: orange;
 }
 
 .mv_nm {
@@ -62,8 +80,23 @@ html div {
     height: 90px;
 }
 
+.mv_nm2 {
+    // width: 100%;
+    // display: flex;
+    // overflow: hidden;
+    margin-top: 25px;
+}
+
+.mv_nm2 .mv_img {
+
+    float: left;
+    width: 100px;
+    height: 140px;
+}
+
 .mv_box {
     display: flex;
+    justify-content: space-between;
 }
 
 .title {
