@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>bbb</h2>
+        <h2>aaa</h2>
         <van-cell-group inset>
             <van-field v-model="value" label="文本" placeholder="请输入用户名" />
         </van-cell-group>
