@@ -14,10 +14,9 @@ export default defineConfig({
   // 反向代理
   server: {
     proxy: {
-      '/api': {
-        target: 'http://192.168.70.99:8080/',
+      '/maoyan': {
+        target: 'https://apis.netstart.cn',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
   }

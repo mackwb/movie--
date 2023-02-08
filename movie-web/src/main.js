@@ -9,8 +9,9 @@ import { Icon } from 'vant';
 import { Tab, Tabs } from 'vant';
 import { Divider } from 'vant';
 import { Sticky } from 'vant';
-// import { SwipeCell } from 'vant';
-import { Field, CellGroup } from 'vant';
+import { SwipeCell } from 'vant';
+
+
 
 
 
@@ -33,9 +34,8 @@ app.use(Tab);
 app.use(Tabs);
 app.use(Divider);
 app.use(Sticky);
-// app.use(SwipeCell);
-app.use(Field);
-app.use(CellGroup);
+app.use(SwipeCell);
+
 
 
 
