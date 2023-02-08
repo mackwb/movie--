@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <van-form @submit="onSubmit">
             <van-cell-group inset>
                 <van-field v-model="phone" name="phone" label="" placeholder="手机号"
@@ -14,12 +15,15 @@
             </div>
         </van-form>
 
+
+        <van-nav-bar title="标题" />
+
     </div>
 </template>
 
 <script setup>
 import request from "http";
-import { ref } from 'vue'
+import { ref } from 'vue';
 
  function getCheckData(){
     return request({
@@ -104,6 +108,6 @@ const onSubmit = () => {
 
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
 </style>
