@@ -15,13 +15,18 @@
             </div>
         </van-form>
     </div>
+    <div>
+        <van-nav-bar title="4买票喽" />
+        <h2>我的</h2>
+
+    </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 import { Toast } from 'vant';
 import { useRouter } from "vue-router";
-import {getLoginCellphone,getCheckData} from "../../../woter_movie/src/api/login.js"
+import {getLoginCellphone,getCheckData,} from "../../../woter_movie/src/api/login.js"
 export default {
        setup() {
             const router=useRouter()
@@ -29,8 +34,8 @@ export default {
                let password= ref('')
                let userPhone=ref(null)
                let userPassword=ref(null)
-
-                let submit=()=>{
+                /* let params = params() */
+                let onSubmit=()=>{
                 // 验证手机号码与密码
     
                 // 1.验证手机号码
@@ -64,13 +69,13 @@ export default {
             }
           let  gohome=()=>{
                 window.localStorage.setItem("btabId",0)
-                router.push("/index/one")
+                router.push("/home")
             }
         
        
             getLoginCellphone().then(data=>{
                userPhone.value=phone.value
-               userPassword.value= password.value
+               userPassword.value=password.value
             })
         
         return {
@@ -80,7 +85,8 @@ export default {
                 userPassword,
                 getLoginCellphone,
                 gohome,
-                submit
+                onSubmit,
+                
          }
        } 
 }  
