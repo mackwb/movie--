@@ -1,6 +1,6 @@
 <template>
     <div>
-        <van-nav-bar title="标题" />
+        <h2>第三页</h2>
     </div>
 </template>
 
