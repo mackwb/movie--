@@ -8,8 +8,16 @@
             <div v_xx>
                 <h3>{{ ViewNm.nm }}</h3>
                 <span>{{ ViewNm.enm }}</span><br>
+                <span>{{ catXx[0] }}/{{ catXx[1] }}
+                    <img class="movie_img" src="../assets/images/movie-tag-2DIMAX.png" alt="">
+                </span><br>
                 <span>{{ starXx[0] }}/{{ starXx[1] }}/{{ starXx[2] }}</span><br>
-                <span>{{ catXx[0] }}/{{ catXx[1] }}/{{ catXx[2] }}</span>
+            </div>
+            <div>
+                <span>{{ ViewNm.onlineDate }} / {{ ViewNm.dur }}分钟</span>
+            </div>
+            <div class="btn">
+                
             </div>
         </div>
 
@@ -91,5 +99,15 @@ export default {
     // display: flex;
     width: 100px;
     height: 138px;
+}
+
+.movie_img {
+    border-radius: 2px;
+    margin-left: 4px;
+    vertical-align: text-bottom;
+    // display: flex;
+    align-items: center;
+    height: 14px;
+
 }
 </style>
