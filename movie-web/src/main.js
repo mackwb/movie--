@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from '../src/store/index2';
 // 1. 引入你需要的组件
 import { Button } from 'vant';
 import { NavBar } from 'vant';
@@ -14,11 +15,6 @@ import { List } from 'vant';
 
 
 
-
-
-
-
-
 // 2. 引入组件样式
 import 'vant/lib/index.css';
 
@@ -27,6 +23,7 @@ import 'vant/lib/index.css';
 const app = createApp(App)
 
 app.use(router)
+app.use(store)
 app.use(NavBar)
 app.use(Button)
 app.use(Tabbar);

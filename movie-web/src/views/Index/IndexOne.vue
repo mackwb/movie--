@@ -5,14 +5,14 @@
         <div class="mv_box">
 
             <div class="mv_nm" v-for="item, index in Movie" :key="index">
-                <img class="mv_img" :src="item.img" alt="" />
+                <img class="mv_img" :src="item.img" alt=""  @click="detail(item.id)" />
                 <h5 class="name">{{ item.nm }}</h5>
             </div>
         </div>
         <div>
             <van-list class="list" @load="onLoad">
                 <div class="mv_nm2" v-for="item, index in Movie" :key="index">
-                    <img class="mv_img" :src="item.img" alt="" />
+                    <img class="mv_img" :src="item.img" alt=""  @click="detail(item.id)" />
                     <div class="mv_nm3">
                         <h4>{{ item.nm }}</h4>
                         <p v-if="item.sc != 0">观众评价:{{ item.sc }}</p>
@@ -34,21 +34,30 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { getMostpraised, getHotmovies, getMoreHotmovies } from '../../api/home'
+import { useStore } from "vuex";
 
-import { getMostpraised, getHotmovies, getMoreHotmovies } from '../../../../woter_movie/src/api/home'
 export default {
-    data() {
-        return {
-            movie: [],
-        }
-    },
+    // data() {
+    //     return {
+    //         movie: [],
+    //     }
+    // },
 
     setup() {
+        const route = useRoute() //路由
+        const state = useStore()
+        const router = useRouter()
         const list = ref([]);
         const Movie = ref([])
+        // let cityId = route.query.id == null ? ref(20) : ref(route.query.id)
+        let cityId =  ref(20)
+
         const loading = ref(true);
         const finished = ref(false);
         const refreshing = ref(true);
+        
 
         const onLoad = () => {
             getHotmovies().then((data) => {
@@ -58,6 +67,21 @@ export default {
                 // getMoreFun(movieIds.value);
             });
         };
+        let detail = (id) => {
+            // console.log(route);
+            // console.log(id);
+            state.commit("detail", id)
+            router.push(
+                {
+                    path: '/viewXx',
+                    query: {
+                        id: cityId.value
+                    }
+                }
+            )
+
+        }
+
 
         // const onRefresh = () => {
         // //     // 清空列表数据
@@ -71,6 +95,7 @@ export default {
 
         return {
             list,
+            detail,
             onLoad,
             Movie,
             loading,
