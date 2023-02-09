@@ -5,6 +5,8 @@ const Index = () => import('../views/Index.vue')
 const Video = () => import('../views/Video.vue')
 const Home = () => import('../views/Home.vue')
 const ViewXx= () => import('../views/ViewXx.vue')
+const HomeVideo= () => import('../views/HomeVideo.vue')
+
 
 
 const IndexOne = () => import('../views/Index/IndexOne.vue')
@@ -17,6 +19,11 @@ const IndexFour = () => import('../views/Index/IndexFour.vue')
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path:'/homeVideo',
+      name:'homeVideo',
+      component:HomeVideo
+    },
     {
       path:'/viewXx',
       name:'viewXx',

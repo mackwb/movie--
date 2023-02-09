@@ -12,6 +12,9 @@ import { Divider } from 'vant';
 import { Sticky } from 'vant';
 import { SwipeCell } from 'vant';
 import { List } from 'vant';
+import vue3videoPlay from 'vue3-video-play' // 引入组件
+import 'vue3-video-play/dist/style.css' // 引入css
+
 
 
 
@@ -35,6 +38,8 @@ app.use(Divider);
 app.use(Sticky);
 app.use(SwipeCell);
 app.use(List);
+app.use(vue3videoPlay)
+
 
 
 
