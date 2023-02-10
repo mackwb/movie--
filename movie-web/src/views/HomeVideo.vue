@@ -30,10 +30,9 @@
             </van-sticky>
 
             <div class="">
-                <div class="View_title">{{ playVideo.title }}</div>
-                <div>
-                    <span>{{ time(playVideo.onlineTime) }}</span>
-                </div>
+                
+                <div class="View_title"><p>{{ playVideo.title }}</p></div>
+                <div class="View_date"><span><p>{{ time(playVideo.onlineTime) }}</p></span></div>
                 <div class="Gn_box">
                     <div class="Gn_item" @click="thumbsUp(playVideo.id)">
                         <img class="movie-img" v-if="!Pd" src="../assets/images/middle-1.png" alt="" />
@@ -55,7 +54,8 @@
                     <section>
                         <ul>
                             <li v-for="item in videolist" :key="item.id" @click="update(item.id)">
-                                <img :src="item.video.imgUrl" class="movie-img">
+                                <div><img :src="item.video.imgUrl" class="movie-img"></div>
+                            
                                 <!-- <span class="label">预告片</span> -->
                                 <!-- <span class="txt" v-if="item.id == playVideo.id">播放中</span> -->
                                 <div>
@@ -193,9 +193,9 @@ export default {
     height: 100%;
 }
 
-.Play {
+/* .Play {
     // height: 2000px;
-}
+} */
 
 .d-player-wrap {
     width: auto !important;
@@ -204,17 +204,17 @@ export default {
 
 .Play_Xx_Nav {
     width: 100%;
-    background-color: antiquewhite;
+    background-color:#fff;
     height: 38.5px;
     display: flex;
-
+    border-color: #fff;
     .Xx_Nav {
         flex: 1;
         height: 38.5px;
-        font-weight: 400;
+        font-weight: 700;
         font-family: PingFangSC-Regular;
-        font-size: 16px;
-        color: #999;
+        font-size: 20px;
+        color: #000;
         letter-spacing: 0;
         text-align: center;
         display: flex;
@@ -240,7 +240,7 @@ export default {
             .comment-total {
                 position: absolute;
                 left: 50%;
-                top: -5px;
+                top: -10px;
                 font-weight: 400;
                 font-family: PingFangSC-Regular;
                 font-size: 11px;
@@ -291,5 +291,60 @@ export default {
     width: 124px;
     height: 70px;
     border-radius: 3px;
+}
+.View_title p{
+    height: 40px;
+    line-height: 26px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 520;
+}
+.View_date span p{
+    height: 30px;
+    line-height: 26px;
+    font-size: 16px;
+    color: #aaa
+}
+.Gn_box{
+    display: flex;
+    
+}
+.Gn_box .Gn_item{
+    flex: 1;
+}
+.All_move{
+    width: 100%;
+}
+.All_move>div{
+    height: 30px;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+    margin: 20px 0 15px 10px;
+}
+.All_move ul li{
+    display: flex;
+    width: 335px;
+    border-bottom: 1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 40px;
+    margin-bottom:5px;
+}
+.All_move ul li img{
+    width: 120px;
+    
+}
+.All_move ul li div:nth-child(1){
+    width: 120px;
+    margin-right:10px;
+}
+.All_move ul li div:nth-child(2){
+    width: 220px;
+    line-height:22px;
+    font-size:14px;
+    font-weight:500;
+}
+.All_move ul li.hover>div:nth-child(2){
+    color:red;
 }
 </style>

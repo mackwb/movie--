@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="box" v-if="showview">
         <!-- <h2>第一页</h2> -->
         <p class="title">最受好评电影</p>
         <div class="mv_all">
@@ -31,6 +31,12 @@
 
 
     </div>
+    <div class="lodaing" v-else="showview">
+        <div class="img">
+            <img class="img1" src="../../assets/images/maoyan01.png" alt="" />
+            <img class="img2" src="../../assets/images/maoyan02.png" alt="" />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -59,6 +65,11 @@ export default {
         const finished = ref(false);
         const refreshing = ref(true);
 
+        let showview = ref(false)
+
+
+        
+
 
         const onLoad = () => {
             getHotmovies().then((data) => {
@@ -68,6 +79,11 @@ export default {
                 // getMoreFun(movieIds.value);
             });
         };
+
+         setTimeout(() => {
+                    showview.value = true;
+                }, 2000);
+
         let detail = (id) => {
             // console.log(route);
             // console.log(id);
@@ -103,6 +119,7 @@ export default {
             finished,
             // onRefresh,
             refreshing,
+            showview
         };
     },
 
@@ -255,4 +272,54 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.lodaing {
+    width: 100%;
+    height: 85vh;
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    background-color: #fff;
+    z-index: 99;
+
+    .img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        width: 45px;
+        height: 45px;
+
+        img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+
+        .img2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            -webkit-animation: rotation 15s linear infinite;
+            animation: rotation 15s linear infinite;
+        }
+    }
+}
+
+@keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
 </style>

@@ -1,5 +1,6 @@
 <template>
-    <div class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }" v-if="!Ym_Xs">
+    <van-nav-bar title="" left-text="返回" left-arrow @click-left="onClickLeft" />
+    <div v-if="showview" class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }">
         <div class="top">
             <div class="old" @click="back">卖票猫&nbsp;>&nbsp;{{ ViewNm.nm }}</div>
         </div>
@@ -7,21 +8,22 @@
             <!-- 电影大概信息 -->
             <img class="Xx_img" :src="ViewNm.img" alt="">
             <div v_xx>
-                <h3>{{ ViewNm.nm }}</h3>
-                <span>{{ ViewNm.enm }}</span><br>
-                <span>{{ catXx[0] }}/{{ catXx[1] }}
+                <h3 class="movie_nm">{{ ViewNm.nm }}</h3>
+                <span class="V_Xxone">{{ ViewNm.enm }}</span><br>
+                <span class="V_Xxone">{{ catXx[0] }}/{{ catXx[1] }}
                     <img class="movie_img" src="../assets/images/movie-tag-2DIMAX.png" alt="">
                 </span><br>
-                <span>{{ starXx[0] }}/{{ starXx[1] }}/{{ starXx[2] }}</span><br>
+                <span class="V_Xxone starname">{{ starXx[0] }}/{{ starXx[1] }}/{{ starXx[2] }}</span><br>
             </div>
             <div>
-                <span>{{ ViewNm.onlineDate }} / {{ ViewNm.dur }}分钟</span>
+                <span class="V_Xxone">{{ ViewNm.onlineDate }} / {{ ViewNm.dur }}分钟</span>
             </div>
             <!-- 想看 按钮 -->
             <div class="btn">
                 <button :class="{ 'want_watch': ViewNm.guideToWish }" @click="wish" plain hairline
-                    type="primary"><span>{{ ViewNm.guideToWish ? "已看" : "想看" }}</span></button>
-                <button plain hairline type="success">细边框按钮</button>
+                    type="primary"><van-icon class="btn_icon" name="like" />
+                    <span>{{ ViewNm.guideToWish ? "已看" : "想看" }}</span></button>
+                <button plain hairline type="success"><van-icon class="btn_icon" name="star" />看过</button>
             </div>
 
             <div class="View_Pf" v-if="ViewNm.scoreLabel != '暂无评分'">
@@ -40,11 +42,11 @@
                             </span>
                             <span>人想看</span>
                         </div>
-                        <div class="num_over">
+                        <div class="num_over num">
                             <span>
                                 <count-to :startVal="StNum" :endVal="EndNum2" :decimals="2" :duration="3000"></count-to>
                             </span>
-                            <span>已看</span>
+                            <span>看过&nbsp;&nbsp;></span>
                         </div>
                     </div>
 
@@ -52,17 +54,19 @@
 
                 <div class="Pf_left">
                     <div>
-                        <span>{{ ViewNm.sc }}</span><br>
-                        <span>
-                            <count-to :startVal="StNum" :endVal="EndNum3" :decimals="2"
-                                :duration="3000"></count-to>&nbsp;人评</span>
+                        <span class="score">{{ ViewNm.sc }}</span><br>
+                        <div class="people-grade">
+                            <span>
+                                <count-to class="people-gradeone" :startVal="StNum" :endVal="EndNum3" :decimals="2"
+                                    :duration="3000"></count-to>&nbsp;人评</span>
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="Pf_right">
 
-                    <div class="stars_bar bar1">
+                    <div class="stars-percent-bar">
                         <div class="stars">
                             <img src="../assets/images/white-star.png" alt="" />
                             <img src="../assets/images/white-star.png" alt="" />
@@ -75,7 +79,7 @@
                         </div>
                     </div>
 
-                    <div class="stars_bar">
+                    <div class="stars-percent-bar">
                         <div class="stars">
                             <img src="../assets/images/grey-star.png" alt="" />
                             <img src="../assets/images/white-star.png" alt="" />
@@ -87,7 +91,7 @@
                             <div class="percent" :class="{ active1: !loading }"></div>
                         </div>
                     </div>
-                    <div class="stars_bar">
+                    <div class="stars-percent-bar">
                         <div class="stars">
                             <img src="../assets/images/grey-star.png" alt="" />
                             <img src="../assets/images/grey-star.png" alt="" />
@@ -99,7 +103,7 @@
                             <div class="percent" :class="{ active1: !loading }"></div>
                         </div>
                     </div>
-                    <div class="stars_bar">
+                    <div class="stars-percent-bar">
                         <div class="stars">
                             <img src="../assets/images/grey-star.png" alt="" />
                             <img src="../assets/images/grey-star.png" alt="" />
@@ -111,7 +115,7 @@
                             <div class="percent" :class="{ active1: !loading }"></div>
                         </div>
                     </div>
-                    <div class="stars_bar">
+                    <div class="stars-percent-bar">
                         <div class="stars">
                             <img src="../assets/images/grey-star.png" alt="" />
                             <img src="../assets/images/grey-star.png" alt="" />
@@ -160,9 +164,9 @@
         <!-- 简介 -->
         <div class="View_Jj">
             <div class="Jj_top">
-                <span>简介</span>
+                <span style="color:white">简介</span>
                 <button type="button" :class="[{ open: open }, { close: !open }]" @click="open = !open">
-                    <span>展开</span>
+                    <span class="Jj_topall">展开</span>
                     <img src="..//assets/images/arrow-right.png" alt="">
                 </button>
             </div>
@@ -178,7 +182,7 @@
             <div class="Yy_top">
                 <span>演职人员</span>
                 <div>
-                    <span>全部</span>
+                    <span class="Yy_topall">全部</span>
                     <img src="../assets/images/arrow-right.png" alt="">
                 </div>
             </div>
@@ -199,7 +203,7 @@
         <div class="View_Sp">
             <div class="Sp_top">
                 <span>视频推荐</span>
-                <div>
+                <div class="View_Spone">
                     <span>全部</span>
                     <img src="../assets/images/arrow-right.png" alt="">
                 </div>
@@ -221,7 +225,7 @@
         <div class="View_Jz">
             <div class="Jz_top">
                 <span>剧照</span>
-                <div>
+                <div class="View_Jzpone">
                     <span>全部{{ ViewJz.length }}张</span>
                     <img src="../assets/images/arrow-right.png" alt="">
                 </div>
@@ -236,15 +240,14 @@
                 </ul>
             </div>
         </div>
-
     </div>
-
-    <div v-else="Ym_Xs">
+    <div class="lodaing" v-else="showview">
         <div class="img">
             <img class="img1" src="../assets/images/maoyan01.png" alt="" />
             <img class="img2" src="../assets/images/maoyan02.png" alt="" />
         </div>
     </div>
+
 </template>
 
 <script>
@@ -276,7 +279,7 @@ export default {
         let EndNum2 = ref(0)
         let EndNum3 = ref(0)
         let EndNum4 = ref(0)
-        let Ym_Xs = ref(true)
+        let showview = ref(false)
 
         let open = ref(true); //展开内容
 
@@ -305,10 +308,8 @@ export default {
                 EndNum4.value = ViewNm.value.wish;
 
                 setTimeout(() => {
-                    loading.value = false;
-                }, 500);
-
-
+                    showview.value = true;
+                }, 2000);
 
                 catXx.value = data.movie.cat.split(","); //对电影演员做逗号筛选
                 starXx.value = data.movie.star == null ? null : data.movie.star.split(","); //对电影类型做逗号筛选返回
@@ -334,7 +335,8 @@ export default {
                 EndNum.value--
             }
         }
-
+        /* 返回 */
+        const onClickLeft = () => history.back();
         return {
             ViewNm,
             ViewPf,
@@ -354,14 +356,18 @@ export default {
             EndNum4,
             loading,
             open,
-            Ym_Xs
+            showview,
+            /* 返回 */
+            onClickLeft
         };
+
 
 
     }
 
 
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -370,15 +376,21 @@ export default {
     margin: 0;
 }
 
+.van-nav-bar {
+    opacity: 0;
+    position: absolute;
+}
+
 .ViewXx {
     height: 1000px;
     overflow-y: scroll;
+    padding-left: 4%;
 }
 
 .top .old {
     width: 100%;
     // overflow: hidden;
-    padding: 21px 16px;
+    padding: 4% 0 4% 0;
     box-sizing: border-box;
     // display: flex;
     align-items: center;
@@ -392,11 +404,23 @@ export default {
     // width: 100%;
 }
 
+.V_Xxone {
+    font-size: 13px;
+    color: hsla(0, 0%, 100%, 0.5);
+    line-height: 20px;
+}
+
+/* 名字间距 */
+.starname {
+    line-height: 30px;
+}
+
 .Xx_img {
     float: left;
     // display: flex;
-    width: 100px;
-    height: 138px;
+    width: 30%;
+    /* height: 138px; */
+    margin-right: 15px;
 }
 
 .movie_img {
@@ -406,6 +430,11 @@ export default {
     // display: flex;
     align-items: center;
     height: 14px;
+}
+
+.movie_nm {
+    font-size: 22px;
+    margin-bottom: 4%;
 }
 
 .btn button {
@@ -418,10 +447,19 @@ export default {
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
     border-radius: 4px;
     font-size: 14px;
-    width: 40%;
-    height: 30px;
+    width: 29%;
+    height: 34px;
     line-height: 14px;
     color: #fff;
+}
+
+/* 看过图标 */
+.btn_icon {
+    padding-right: 3%;
+}
+
+.btn button:nth-of-type(1) {
+    margin-right: 3%;
 }
 
 .want_watch {
@@ -436,49 +474,191 @@ export default {
     background-color: rgba(0, 0, 0, 0.18);
     border-radius: 8px;
     margin-top: 15px;
+    margin-right: 18px;
     padding: 9px 10px 10px 0;
     box-sizing: border-box;
 }
 
 .View_Pf .Pf_top {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: PingFangSC-Regular;
+    padding-left: 10px;
+    margin-bottom: 10px;
+
+    .left {
+        font-size: 12px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-weight: 400;
+
+        &>img {
+            width: 15.6px;
+            height: 15.6px;
+            margin-right: 4px;
+        }
+
+        &>span {
+            font-size: 12px;
+            color: #fff;
+        }
+
+    }
+
+    .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 12px;
+        margin-right: 0px;
+
+        .num {
+            color: #fff;
+            opacity: 0.6;
+            font-size: 12px;
+            transform: scale(0.9);
+        }
+
+        .watch {
+            margin-left: 13px;
+        }
+
+        .img {
+            &>img {
+                width: 5px;
+                height: 9px;
+                margin-left: 4px;
+            }
+        }
+    }
 }
 
-.stars_bar {
+.score {
+    font-weight: 600;
+    font-family: MaoYanHeiTi-H-H;
+    font-size: 26px;
+    color: #ffb400;
+    line-height: 26px;
+    letter-spacing: 0;
+    text-align: center;
+    margin-bottom: 4px;
+    margin-left: 45%;
+
+
+}
+
+.people-grade {
+    font-weight: 400;
+    opacity: 0.6;
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    display: flex;
+    word-break: keep-all;
+    color: hsla(0, 0%, 100%, 0.4);
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 10px;
+    zoom: 0.5;
+
+    &>span {
+        font-weight: 400;
+        font-family: PingFangSC-Regular;
+        font-size: 20px;
+        word-break: keep-all;
+        color: hsla(0, 0%, 100%, 0.4);
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 20px;
+        padding-left: 20px;
+    }
+}
+
+.stars-percent-bar {
     display: flex;
     align-items: center;
     margin-bottom: 3px;
 
-}
+    .stars {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 35px;
 
-.stars {
-    display: flex;
-    background-color: darkorange;
-    justify-content: flex-end;
-    align-items: center;
+        &>img {
+            width: 5px;
+            height: 5px;
+            margin-left: 0.3px;
+            opacity: 0.4;
+        }
+    }
 
-    // width: 35px;
-}
+    .bar {
+        width: 71px;
+        height: 4px;
+        background-color: hsla(0, 58%, 53%, 0.06);
+        border-radius: 1px;
+        margin-left: 4px;
 
-.stars img {
-    width: 5px;
-    height: 5px;
-}
+        .percent {
+            height: 100%;
+            width: 0;
+            background: hsla(0, 0%, 100%, 0.3);
+            border-radius: 1px;
+            transition: width 1.5s;
+        }
+    }
 
-.stars_bar .bar {
-    width: 71px;
-    height: 4px;
-    background-color: hsla(0, 98%, 49%, 0.06);
-    border-radius: 1px;
-    margin-left: 4px;
-}
+    &:nth-child(1) {
+        .bar {
+            .percent {
+                &.active1 {
+                    animation: animation2 1s linear forwards;
+                }
+            }
+        }
+    }
 
-.stars_bar .bar .percent {
-    height: 100%;
-    width: 0;
-    background: hsla(127, 71%, 44%, 0.3);
-    border-radius: 1px;
-    transition: width 1.5s;
+    &:nth-child(2) {
+        .bar {
+            .percent {
+                &.active1 {
+                    animation: animation3 1s linear forwards;
+                }
+            }
+        }
+    }
+
+    &:nth-child(3) {
+        .bar {
+            .percent {
+                &.active1 {
+                    animation: animation4 1s linear forwards;
+                }
+            }
+        }
+    }
+
+    &:nth-child(4) {
+        .bar {
+            .percent {
+                &.active1 {
+                    animation: animation5 1s linear forwards;
+                }
+            }
+        }
+    }
+
+    &:nth-child(5) {
+        .bar {
+            .percent {
+                &.active1 {
+                    animation: animation6 1s linear forwards;
+                }
+            }
+        }
+    }
 }
 
 .bar1 .bar .percent .active1 {
@@ -487,15 +667,17 @@ export default {
 
 .View_Pm {
     margin-right: 5px;
-    width: 120px;
-    background-color: chartreuse;
+    // width: 135px;
+    /*  background-color: chartreuse; */
     display: flex;
     justify-content: flex-end;
     align-self: center;
+    padding-left: 20px;
+    margin-bottom: 20px;
 }
 
 .View_Pm .Pm_box {
-    width: 120px;
+    width: 300px;
     height: 44px;
     box-sizing: border-box;
     background-image: linear-gradient(270deg,
@@ -504,6 +686,8 @@ export default {
     border-radius: 6px;
     padding: 4px;
     position: relative;
+    font-size: 10px;
+    color: #fff4bd;
 }
 
 .Pf_left {
@@ -511,7 +695,7 @@ export default {
     float: left;
     height: 40px;
     width: 100px;
-    background-color: antiquewhite;
+    /* background-color: hsla(0, 0%, 100%, 0.2); */
 }
 
 .Pf_left div :nth-child(n+2) {
@@ -522,12 +706,13 @@ export default {
 .Pf_right {
     float: left;
     height: 40px;
-    background-color: rgb(129, 128, 124);
+    /* background-color: rgb(129, 128, 124); */
 }
 
 .View_Jj {
     position: relative;
-    padding: 16px 0 0;
+    padding: 15px 10px 10px 0;
+    font-size: 16px;
 
     .Jj_top {
         display: flex;
@@ -540,6 +725,12 @@ export default {
         border: none;
         background-color: transparent;
         outline: none;
+    }
+
+    .Jj_topall {
+        color: #fff;
+        opacity: 0.4;
+        padding-right: 10px;
     }
 
     .Jj_top button img {
@@ -582,6 +773,7 @@ export default {
 
 .View_Yy {
     margin-top: 10px;
+    padding-right: 10px;
 
     .Yy_top {
         font-size: 15px;
@@ -600,6 +792,10 @@ export default {
                 height: 8px;
                 margin-right: 6px;
                 display: inline-block;
+            }
+
+            .Yy_topall {
+                padding-right: 10px;
             }
         }
     }
@@ -621,6 +817,7 @@ export default {
         li {
 
             .Yy {
+                margin-right: 10px;
 
                 img {
                     width: 80px;
@@ -661,12 +858,17 @@ export default {
 .View_Jz {
     margin-top: 18px;
 
+
     .Jz_top {
         font-size: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         color: #fff;
+
+        .View_Jzpone {
+            margin-right: 15px;
+        }
 
         div {
             opacity: 0.6;
@@ -743,6 +945,10 @@ export default {
             }
         }
 
+        .View_Spone {
+            padding-right: 15px;
+        }
+
     }
 
     .Sp_up {
@@ -802,6 +1008,55 @@ export default {
         }
     }
 
+}
+
+.lodaing {
+    width: 100%;
+    height: 85vh;
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    background-color: #fff;
+    z-index: 99;
+
+    .img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        width: 45px;
+        height: 45px;
+
+        img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+
+        .img2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            -webkit-animation: rotation 15s linear infinite;
+            animation: rotation 15s linear infinite;
+        }
+    }
+}
+
+@keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 

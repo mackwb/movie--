@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from '../src/store/index2';
+// import vant from 'vant'
 // 1. 引入你需要的组件
 import { Button } from 'vant';
 import { NavBar } from 'vant';
@@ -12,8 +13,11 @@ import { Divider } from 'vant';
 import { Sticky } from 'vant';
 import { SwipeCell } from 'vant';
 import { List } from 'vant';
+import { Form, Field, CellGroup } from 'vant';
 import vue3videoPlay from 'vue3-video-play' // 引入组件
 import 'vue3-video-play/dist/style.css' // 引入css
+import { Notify } from 'vant';
+import createPersistedState from "vuex-persistedstate";
 
 
 
@@ -39,8 +43,12 @@ app.use(Sticky);
 app.use(SwipeCell);
 app.use(List);
 app.use(vue3videoPlay)
-
-
+app.use(Form);
+app.use(Field);
+app.use(CellGroup);
+app.use(Notify);
+app.use(createPersistedState)
+// app.use(vant)
 
 
 

@@ -1,4 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// import updateToken from '../api/'
+import { useStore } from "vuex";
+
+const store = useStore()
 
 const Login = () => import('../views/Login.vue')
 const Index = () => import('../views/Index.vue')
@@ -34,16 +38,18 @@ const router = createRouter({
       component:ViewXx
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home,
       redirect:'/one',
+      // beforeEnter:beforeEnter,
       children: [
         {
           path: '/video',
           name: 'video',
           component: Video,
           redirect:'/videoOne',
+          // beforeEnter:beforeEnter,
           children:[
             {
               path:'/videoOne',
@@ -59,15 +65,17 @@ const router = createRouter({
           ]
         },
         {
-          path: '/login',
+          path: '/',
           name: 'login',
           component: Login,
+          // beforeEnter:beforeEnter,
         },
         {
           path: '/index',
           name: 'index',
           component: Index,
           redirect: '/one',
+          // beforeEnter:beforeEnter,
           children: [
             {
               path: '/one',
@@ -95,5 +103,7 @@ const router = createRouter({
     },
   ]
 })
+
+
 
 export default router
