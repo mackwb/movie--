@@ -54,7 +54,7 @@
                     <div>{{ View_Nm }}全部视频</div>
                     <section>
                         <ul>
-                            <li v-for="item in videolist" :key="item.id">
+                            <li v-for="item in videolist" :key="item.id" @click="update(item.id)">
                                 <img :src="item.video.imgUrl" class="movie-img">
                                 <!-- <span class="label">预告片</span> -->
                                 <!-- <span class="txt" v-if="item.id == playVideo.id">播放中</span> -->
@@ -101,6 +101,7 @@ export default {
         let flag = ref(false);
         let videoIndex = ref(0);
         let VideoUrl = ref([])
+
 
         let getVideoFun = () => {
             getMovieDetail({ movieId: route.query.id }).then((data) => {
@@ -152,6 +153,20 @@ export default {
                 videolist.value[index].upCount = videolist.value[index].upCount - 1;
             }
         };
+
+        //
+        let update = (id) =>{
+            console.log(id);
+            console.log(videolist.value);
+            let index = videolist.value.findIndex((item) => item.id == id)
+            playVideo.value = videolist.value[index]
+            VideoUrl.value = playVideo.value.video.url
+            console.log(VideoUrl.value);
+            // console.log( videolist.value[index]);
+            // let index = videolist.value[id]
+
+            console.log(index);
+        }
         getVideoFun()
         return {
             getVideoFun,
@@ -163,7 +178,8 @@ export default {
             time,
             thumbsUp,
             Pd,
-            View_Nm
+            View_Nm,
+            update
 
         }
     }

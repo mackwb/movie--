@@ -1,5 +1,5 @@
 <template>
-    <div class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }">
+    <div class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }" v-if="!Ym_Xs">
         <div class="top">
             <div class="old" @click="back">卖票猫&nbsp;>&nbsp;{{ ViewNm.nm }}</div>
         </div>
@@ -222,7 +222,7 @@
             <div class="Jz_top">
                 <span>剧照</span>
                 <div>
-                    <span>全部{{ViewJz.length}}张</span>
+                    <span>全部{{ ViewJz.length }}张</span>
                     <img src="../assets/images/arrow-right.png" alt="">
                 </div>
             </div>
@@ -237,6 +237,13 @@
             </div>
         </div>
 
+    </div>
+
+    <div v-else="Ym_Xs">
+        <div class="img">
+            <img class="img1" src="../assets/images/maoyan01.png" alt="" />
+            <img class="img2" src="../assets/images/maoyan02.png" alt="" />
+        </div>
     </div>
 </template>
 
@@ -269,6 +276,7 @@ export default {
         let EndNum2 = ref(0)
         let EndNum3 = ref(0)
         let EndNum4 = ref(0)
+        let Ym_Xs = ref(true)
 
         let open = ref(true); //展开内容
 
@@ -299,6 +307,8 @@ export default {
                 setTimeout(() => {
                     loading.value = false;
                 }, 500);
+
+
 
                 catXx.value = data.movie.cat.split(","); //对电影演员做逗号筛选
                 starXx.value = data.movie.star == null ? null : data.movie.star.split(","); //对电影类型做逗号筛选返回
@@ -343,7 +353,8 @@ export default {
             EndNum3,
             EndNum4,
             loading,
-            open
+            open,
+            Ym_Xs
         };
 
 

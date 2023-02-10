@@ -14,6 +14,10 @@ const IndexTwo = () => import('../views/Index/IndexTwo.vue')
 const IndexThree = () => import('../views/Index/IndexThree.vue')
 const IndexFour = () => import('../views/Index/IndexFour.vue')
 
+const VideoOne = () => import('../views/Video/VideoOne.vue')
+const VideoTwo = () => import('../views/Video/VideoTwo.vue')
+
+
 
 
 const router = createRouter({
@@ -30,14 +34,29 @@ const router = createRouter({
       component:ViewXx
     },
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
+      redirect:'/one',
       children: [
         {
           path: '/video',
           name: 'video',
           component: Video,
+          redirect:'/videoOne',
+          children:[
+            {
+              path:'/videoOne',
+              name:'videoOne',
+              component:VideoOne,
+            },
+            {
+              path:'/videoTwo',
+              name:'videoTwo',
+              component:VideoTwo,
+              // redirect:'/videoTwo'
+            }
+          ]
         },
         {
           path: '/login',
