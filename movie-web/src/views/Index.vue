@@ -1,12 +1,12 @@
 <template>
     <div>
         <van-sticky>
-                <van-nav-bar title="1买票喽" />
+                <van-nav-bar title="羽博影城" />
             <van-tabs sticky>
-                <van-tab title="标签 1" to="one"></van-tab>
-                <van-tab title="标签 2" to="two"></van-tab>
-                <van-tab title="标签 3" to="three"></van-tab>
-                <van-tab title="标签 4" to="four"></van-tab>
+                <van-tab title="热映" to="one"></van-tab>
+                <van-tab title="敬请期待" to="two"></van-tab>
+                <van-tab title="敬请期待" to="three"></van-tab>
+                <van-tab title="敬请期待" to="four"></van-tab>
             </van-tabs>
             <van-divider />
         </van-sticky>

@@ -1,5 +1,5 @@
 <template>
-    <van-nav-bar title="标题" />
+    <van-nav-bar title="羽博影城" />
     <div class="all">
         <van-form @submit="onSubmit">
             <van-cell-group inset>
@@ -59,9 +59,9 @@ export default {
                             window.localStorage.setItem("token",data.data[0].token)
                             window.localStorage.setItem("userId",data.data[0].userId)
                             // Toast("登陆成功");
-                            showNotify('登陆成功');
+                            showNotify({ type: 'success', message: '登陆成功',duration: 1000, });
                             
-                            router.push("/home")
+                            router.push("/")
                         }else{
                             showNotify('请输入正确手机号码与密码');
 

@@ -8,8 +8,9 @@ const Login = () => import('../views/Login.vue')
 const Index = () => import('../views/Index.vue')
 const Video = () => import('../views/Video.vue')
 const Home = () => import('../views/Home.vue')
-const ViewXx= () => import('../views/ViewXx.vue')
-const HomeVideo= () => import('../views/HomeVideo.vue')
+const ViewXx = () => import('../views/ViewXx.vue')
+const AAA = () => import('../views/AAA.vue')
+const HomeVideo = () => import('../views/HomeVideo.vue')
 
 
 
@@ -22,85 +23,96 @@ const VideoOne = () => import('../views/Video/VideoOne.vue')
 const VideoTwo = () => import('../views/Video/VideoTwo.vue')
 
 
-
+let beforeEnter = (to, from, next) => {
+  let token = window.localStorage.getItem("token");
+  // 判断是否登录
+  if (!token) {
+    console.log(123);
+    next("login");
+    return;
+  } else {
+    next();
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    //第一页
     {
-      path:'/homeVideo',
-      name:'homeVideo',
-      component:HomeVideo
-    },
-    {
-      path:'/viewXx',
-      name:'viewXx',
-      component:ViewXx
-    },
-    {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
-      redirect:'/one',
-      // beforeEnter:beforeEnter,
+      redirect: '/index/one',
       children: [
         {
-          path: '/video',
+          path: 'login',
+          name: 'login',
+          component: Login,
+        },
+        {
+          path: 'video',
           name: 'video',
           component: Video,
-          redirect:'/videoOne',
-          // beforeEnter:beforeEnter,
-          children:[
+          redirect:'video/videoOne',
+          beforeEnter:beforeEnter,
+          children: [
             {
-              path:'/videoOne',
-              name:'videoOne',
-              component:VideoOne,
+              path: 'videoOne',
+              name: 'videoOne',
+              component: VideoOne,
             },
             {
-              path:'/videoTwo',
-              name:'videoTwo',
-              component:VideoTwo,
-              // redirect:'/videoTwo'
-            }
+              path: 'videoTwo',
+              name: 'videoTwo',
+              component: VideoTwo,
+            },
           ]
         },
         {
-          path: '/',
-          name: 'login',
-          component: Login,
-          // beforeEnter:beforeEnter,
-        },
-        {
-          path: '/index',
+          path: 'index',
           name: 'index',
           component: Index,
-          redirect: '/one',
-          // beforeEnter:beforeEnter,
+          beforeEnter:beforeEnter,
           children: [
             {
-              path: '/one',
+              path: 'one',
               name: 'indexOne',
               component: IndexOne,
             },
             {
-              path: '/two',
+              path: 'two',
               name: 'indexTwo',
-              component: IndexTwo,
+              component: IndexTwo
             },
             {
-              path: '/three',
+              path: 'three',
               name: 'indexThree',
-              component: IndexThree,
+              component: IndexThree
             },
             {
-              path: '/Four',
+              path: 'four',
               name: 'indexFour',
-              component: IndexFour,
-            },
-          ]
-        },
+              component: IndexFour
+            }
+          ],
+        }
       ]
     },
+    // 第二页
+    {
+      path: '/viewXx',
+      name: 'viewXx',
+      component: ViewXx,
+    },
+    {
+      path: '/homeVideo',
+      name: 'homeVideo',
+      component: HomeVideo
+    },
+    //第三页
+
+
   ]
 })
 

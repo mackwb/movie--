@@ -1,6 +1,6 @@
 <template>
     <van-nav-bar title="" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <div v-if="showview" class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }">
+    <div class="ViewXx" :style="{ backgroundColor: ViewNm.backgroundColor }">
         <div class="top">
             <div class="old" @click="back">卖票猫&nbsp;>&nbsp;{{ ViewNm.nm }}</div>
         </div>
@@ -240,14 +240,8 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="lodaing" v-else="showview">
-        <div class="img">
-            <img class="img1" src="../assets/images/maoyan01.png" alt="" />
-            <img class="img2" src="../assets/images/maoyan02.png" alt="" />
-        </div>
-    </div>
 
+    </div>
 </template>
 
 <script>
@@ -279,7 +273,6 @@ export default {
         let EndNum2 = ref(0)
         let EndNum3 = ref(0)
         let EndNum4 = ref(0)
-        let showview = ref(false)
 
         let open = ref(true); //展开内容
 
@@ -308,8 +301,8 @@ export default {
                 EndNum4.value = ViewNm.value.wish;
 
                 setTimeout(() => {
-                    showview.value = true;
-                }, 2000);
+                    loading.value = false;
+                }, 500);
 
                 catXx.value = data.movie.cat.split(","); //对电影演员做逗号筛选
                 starXx.value = data.movie.star == null ? null : data.movie.star.split(","); //对电影类型做逗号筛选返回
@@ -356,7 +349,6 @@ export default {
             EndNum4,
             loading,
             open,
-            showview,
             /* 返回 */
             onClickLeft
         };
@@ -506,7 +498,6 @@ export default {
         }
 
     }
-
     .right {
         display: flex;
         justify-content: flex-end;
@@ -534,47 +525,44 @@ export default {
         }
     }
 }
-
 .score {
-    font-weight: 600;
-    font-family: MaoYanHeiTi-H-H;
-    font-size: 26px;
-    color: #ffb400;
-    line-height: 26px;
-    letter-spacing: 0;
-    text-align: center;
-    margin-bottom: 4px;
-    margin-left: 45%;
-
-
+              font-weight: 600;
+              font-family: MaoYanHeiTi-H-H;
+              font-size: 26px;
+              color: #ffb400;
+              line-height: 26px;
+              letter-spacing: 0;
+              text-align: center;
+              margin-bottom: 4px;
+              margin-left: 45%;
+              
+              
 }
-
 .people-grade {
-    font-weight: 400;
-    opacity: 0.6;
-    font-family: PingFangSC-Regular;
-    font-size: 20px;
-    display: flex;
-    word-break: keep-all;
-    color: hsla(0, 0%, 100%, 0.4);
-    letter-spacing: 0;
-    text-align: center;
-    line-height: 10px;
-    zoom: 0.5;
+              font-weight: 400;
+              opacity: 0.6;
+              font-family: PingFangSC-Regular;
+              font-size: 20px;
+              display: flex;
+              word-break: keep-all;
+              color: hsla(0, 0%, 100%, 0.4);
+              letter-spacing: 0;
+              text-align: center;
+              line-height: 10px;
+              zoom: 0.5;
 
-    &>span {
-        font-weight: 400;
-        font-family: PingFangSC-Regular;
-        font-size: 20px;
-        word-break: keep-all;
-        color: hsla(0, 0%, 100%, 0.4);
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 20px;
-        padding-left: 20px;
-    }
-}
-
+              &>span {
+                font-weight: 400;
+                font-family: PingFangSC-Regular;
+                font-size: 20px;
+                word-break: keep-all;
+                color: hsla(0, 0%, 100%, 0.4);
+                letter-spacing: 0;
+                text-align: center;
+                line-height: 20px;
+                padding-left: 20px;
+              }
+            }
 .stars-percent-bar {
     display: flex;
     align-items: center;
@@ -668,7 +656,7 @@ export default {
 .View_Pm {
     margin-right: 5px;
     // width: 135px;
-    /*  background-color: chartreuse; */
+   /*  background-color: chartreuse; */
     display: flex;
     justify-content: flex-end;
     align-self: center;
@@ -726,13 +714,7 @@ export default {
         background-color: transparent;
         outline: none;
     }
-
-    .Jj_topall {
-        color: #fff;
-        opacity: 0.4;
-        padding-right: 10px;
-    }
-
+    .Jj_topall{color: #fff;opacity: 0.4;padding-right: 10px;}
     .Jj_top button img {
         width: 5px;
         height: 8px;
@@ -793,8 +775,7 @@ export default {
                 margin-right: 6px;
                 display: inline-block;
             }
-
-            .Yy_topall {
+            .Yy_topall{
                 padding-right: 10px;
             }
         }
@@ -816,8 +797,7 @@ export default {
 
         li {
 
-            .Yy {
-                margin-right: 10px;
+            .Yy {margin-right: 10px;
 
                 img {
                     width: 80px;
@@ -857,7 +837,7 @@ export default {
 
 .View_Jz {
     margin-top: 18px;
-
+    
 
     .Jz_top {
         font-size: 15px;
@@ -865,11 +845,9 @@ export default {
         justify-content: space-between;
         align-items: center;
         color: #fff;
-
-        .View_Jzpone {
+        .View_Jzpone{
             margin-right: 15px;
         }
-
         div {
             opacity: 0.6;
             font-size: 12px;
@@ -944,10 +922,7 @@ export default {
                 display: inline-block;
             }
         }
-
-        .View_Spone {
-            padding-right: 15px;
-        }
+        .View_Spone{padding-right: 15px;}
 
     }
 
@@ -1008,55 +983,6 @@ export default {
         }
     }
 
-}
-
-.lodaing {
-    width: 100%;
-    height: 85vh;
-    position: fixed;
-    bottom: 50px;
-    left: 0;
-    background-color: #fff;
-    z-index: 99;
-
-    .img {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        margin: auto;
-        width: 45px;
-        height: 45px;
-
-        img {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-        }
-
-        .img2 {
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            margin: auto;
-            -webkit-animation: rotation 15s linear infinite;
-            animation: rotation 15s linear infinite;
-        }
-    }
-}
-
-@keyframes rotation {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
 }
 
 
